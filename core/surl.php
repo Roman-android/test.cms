@@ -7,89 +7,97 @@ if (!defined('_PLUGSECURE_')) {
 class Surl
 {
     private static $classname = "ЧПУ";
-    
-    public static function getClassName(){
+
+    public static function getClassName()
+    {
         return self::$classname;
     }
 
-	public static function parseUrl($type,$request_uri){
-		$data = array();
-		$quety_alias = database::query("SELECT * FROM `aliases` WHERE `alias`='".$_SERVER['REQUEST_URI']."';");
-		if($quety_alias -> num_rows){
-			$alias = $quety_alias -> fetch_assoc();
-			$request_uri = $alias['addres'];
-		}
+    //todo updated 28.10.2019
+    public static function parseUrl($type, $request_uri){
 
-		if($type == 1){
-			if($request_uri != '/'){
-				$url_path = parse_url($request_uri,PHP_URL_PATH);
-				$uri_parts = explode('/',trim($url_path,'/'));
-				if(count($uri_parts)%2){
-					$uri_parts = explode('&',trim($url_path,'/'));
-					if(isset($_GET['module']) & isset($_GET['action'])){
-						$data['module'] = $_GET['module'];
-						$data['action'] = $_GET['action'];
-						unset($_GET['module']);
-						unset($_GET['action']);
-						foreach($_GET as $key=>$value){
-							$data['params'][$key] = $value;
-							}
-						}else{
-							die('Запрос не может быть обработан 1.');
-						}
-					}else{
-						$data['module'] = array_shift($uri_parts);
-						$data['action'] = array_shift($uri_parts);
-						for($i=0;$i<count($uri_parts);$i++){
-							$data['params'][$uri_parts[$i]] = $uri_parts[++$i];
-						}
-					}
-				}
-				return $data;
-			}else{
-				if ($request_uri != '/'){
-					$url_path = parse_url($request_uri, PHP_URL_PATH);
-					//$uri_parts = explode('&', trim($url_path, ' /'));
-					if(isset($_GET['module']) & isset($_GET['action'])){
-						$data['module'] = $_GET['module'];
-						$data['action'] = $_GET['action'];
-						unset($_GET['module']);
-						unset($_GET['action']);
-						foreach ($_GET as $key => $value){
-							$data['params'][$key] = $value;
-						}
-					}else{
-						die('Запрос не может быть обработан 2.');
-					}
-				}
-				return $data;
-			}
-		}
-
-		public static function genUri($module, $action=null,$params=null){
-            if (config::$s_url) {
-                $result = '/'.$module.'/';
-                if ($action){
-                    $result .= $action.'/';
-                    if (is_array($params)){
-                        foreach ($params as $key => $value){
-                            $result .= $key.'/'.$value;
+        if ($request_uri != '/') {
+            $data = array();
+            $query_alias = database::prepareQuery("SELECT * FROM `aliases` WHERE `alias` = 's:uri';", array('uri' => $_SERVER['REQUEST_URI']));
+            if($query_alias ->num_rows){
+                $alias = $query_alias->fetch_assoc();
+                $request_uri = $alias['address'];
+            }
+            if ($type = 1){
+                $url_path = parse_url($request_uri,PHP_URL_PATH);
+                $uri_parts = explode('/',trim($url_path,'/'));
+                if(count($uri_parts)%2){
+                    if (isset($_GET['module'])){
+                        $data['module'] = $_GET['module'];
+                        unset($_GET['module']);
+                        if (isset($_GET['action'])){
+                            $data['action'] = $_GET['action'];
+                            unset($_GET['action']);
+                        }
+                        foreach ($_GET as $key => $value){
+                            $data['params']['key'] = $value;
+                        }
+                    }else{
+                        $uri_parts = explode('&',trim($url_path,'/'));
+                        if (modules::getModule($uri_parts[0])){
+                            $data['module'] = array_shift($uri_parts);
+                        }else{
+                            handler::engineError('exception', 'Запрос не может быть обработан');
                         }
                     }
+                }else{
+                    $data['module'] = array_shift($uri_parts);
+                    $data['action'] = array_shift($uri_parts);
+                    for ($i=0;$i<count($uri_parts);$i++){
+                        $data['params'][$uri_parts[$i]] = $uri_parts[++$i];
+                    }
                 }
-            } else {
-                $result = '/?module='.$module;
-                if ($action){
-                    $result .= '&action='.$action;
-                    if (is_array($params)){
-                        foreach ($params as $key => $value){
-                            $result .= '&'.$key.'='.$value;
-                        }
+                return $data;
+            }else{
+                if (isset($_GET['module'])){
+                    $data['module'] = $_GET['module'];
+                    unset($_GET['module']);
+                    if (isset($_GET['action'])){
+                        $data['action'] = $_GET['action'];
+                        unset($_GET['action']);
+                    }
+                    foreach ($_GET as $key => $value){
+                        $data['params'][$key] = $value;
+                    }
+                }else{
+                    handler::engineError('exception', 'Запрос не может быть обработан');
+                }
+                return $data;
+            }
+        }
+        return;
+    }
+
+    public static function genUri($module, $action = null, $params = null)
+    {
+        if (config::$s_url) {
+            $result = '/' . $module . '/';
+            if ($action) {
+                $result .= $action . '/';
+                if (is_array($params)) {
+                    foreach ($params as $key => $value) {
+                        $result .= $key . '/' . $value;
                     }
                 }
             }
-            return $result;
+        } else {
+            $result = '/?module=' . $module;
+            if ($action) {
+                $result .= '&action=' . $action;
+                if (is_array($params)) {
+                    foreach ($params as $key => $value) {
+                        $result .= '&' . $key . '=' . $value;
+                    }
+                }
+            }
         }
-	}
+        return $result;
+    }
+}
 
 ?>
