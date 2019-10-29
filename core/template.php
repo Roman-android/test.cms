@@ -84,7 +84,9 @@ class Template{
                 if (!file_exists('./'.$data['dir'].'/'.$data['name'].'/'.$data['name'].'.php')){
                     handler::engineError('template_not_found',$data['dir'].'/'.$data['name'].'/'.$data['name'].'.tpl');
                 }else{
-                    self::$template_dir = '/'.$data['dir'].'/'.$data['name'].'/';
+                    //TODO не работает
+                    //self::$template_dir = '/'.$data['dir'].'/'.$data['name'].'/';
+                    self::$template_dir = $data['dir'].'/'.$data['name'].'/';
                     require_once self::$template_dir.$data['name'].'.php';
                     self::$template_page = $page;
                     self::$template_parts = $t_files;

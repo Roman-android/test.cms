@@ -44,7 +44,7 @@ class Database{
 			if($values){
 				foreach($values as $key => $value){
 					$value_type = substr($prepare,strpos($prepare,':'.$key)-1,1);
-					$value = self::$connection -> mysqli_real_escape_string($value);
+					$value = self::$connection -> real_escape_string($value);
 					switch($value_type){
 						case 'i': $typed_value = (int)$value; break;
 						case 's': $typed_value = (string)$value; break;
