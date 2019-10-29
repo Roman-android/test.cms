@@ -18,8 +18,14 @@ class Template{
     private static $template_parts = array();
     private static $template_vars = array();
 
-    private static function getTemplate(){
-        $template_file = self::$template_dir.self::$template_page.'_template.tpl';
+    //TODO updated 29.10.2019
+    private static function getTemplate($fast = false){
+        if ($fast){
+            $template_file = self::$template_dir.self::$template_page.'.tpl';
+        }else{
+            $template_file = self::$template_dir.self::$template_page.'_template.tpl';
+        }
+
         if (!file_exists($template_file)){
             handler::engineError('template_not_found', $template_file);
             return;
@@ -58,21 +64,37 @@ class Template{
         self::$template;
     }
 
-    public static function loadTemplate($data, $page, $vars){
-        if(!empty($data['dir']) && !empty($data['name'])){
+    //TODO updated 29.10.2019
+    public static function loadTemplate($data, $page, $vars,$fast = false){
+        if(!empty($data)){
 
-            if(!file_exists('./' . $data['dir'] . '/' . $data['name'] . '/' . $data['name'] . '.php')){
-                handler::engineError('template_not_found', $data['dir'] . '/' . $data['name'] . '/' . $data['name'] . '.php');
-            }else{
-                self::$template_dir = './' . $data['dir'] . '/' . $data['name'] . '/';
-                require_once self::$template_dir . $data['name'] . '.php';
-                self::$template_page = $page;
-                self::$template_parts = $t_files;
-                self::$template_vars = $vars;
-                self::getTemplate();
-                self::parseTemplate();
-                return self::$template;
+            if ($fast) {
+                if (!file_exists('./' . $data['dir'] . '/' . $data['name'] . '/' . $page . '.tpl')) {
+                    handler::engineError('template_not_found', $data['dir'] . '/' . $data['name'] . '/' . $page . '.tpl');
+                } else {
+                    self::$template_dir = './' . $data['dir'] . '/' . $data['name'] . '/';
+                    //require_once self::$template_dir . $data['name'] . '.php';
+                    self::$template_page = $page;
+                    self::$template_vars = $vars;
+                    self::getTemplate($fast);
+                    self::parseTemplate();
+                    return self::$template;
+                }
+            } else{
+                if (!file_exists('./'.$data['dir'].'/'.$data['name'].'/'.$data['name'].'.php')){
+                    handler::engineError('template_not_found',$data['dir'].'/'.$data['name'].'/'.$data['name'].'.tpl');
+                }else{
+                    self::$template_dir = '/'.$data['dir'].'/'.$data['name'].'/';
+                    require_once self::$template_dir.$data['name'].'.php';
+                    self::$template_page = $page;
+                    self::$template_parts = $t_files;
+                    self::$template_vars = $vars;
+                    self::getTemplate($fast);
+                    self::parseTemplate();
+                    return self::$template;
+                }
             }
+
         }else{
             handler::engineError('template_not_configure');
         }
