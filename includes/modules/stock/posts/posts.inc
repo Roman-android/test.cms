@@ -1,0 +1,39 @@
+<?php
+
+//TODO added 29.10.2019
+if (!defined('_PLUGSECURE_')){
+    die('Прямой вызов запрещен!');
+}
+
+if (empty($url_data['action'])){
+    functions::setTitle("Новости");
+    $posts = database::query("SELECT * FROM `posts` ORDER BY `id`;");
+    $posts_grid = '';
+    while ($res = $posts->fetch_assoc()){
+        if (config::$s_url){
+            $try_alias = database::prepareQuery("SELECT `alias` FROM `aliases` WHERE `address`='s:addr' ORDER BY `id` LIMIT 1;",
+                array(
+                    'addr' => surl::genUri(
+                        'posts',
+                        'show',
+                        array('id' => $res['id'])
+                    )
+                )
+            );
+
+            if ($try_alias->num_rows){
+                $try_alias = $try_alias->fetch_assoc();
+                $res['id'] =  $try_alias['alias'];
+            }else{
+                $res['id'] = surl::genUri('posts','show',array('id' = $res['id']));
+            }
+
+        }else{
+            $res['id'] = surl::genUri('posts','show',array('id' = $res['id']));
+        }
+        $res['text'] = functions::stripPost($res['text']);
+        $posts_grid .= template::loadTemplate(config::$template,'_POSTS',$res,true);
+    }
+    functions::toContent($posts_grid,'posts');
+    unset($posts_grid,$posts,$res);
+}

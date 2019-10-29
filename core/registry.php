@@ -23,6 +23,7 @@ class Registry implements StorableObject{
         $this->functions='core/functions.php';
         $this->handler='core/handler.php';
 		$this->database='core/database.php';
+		$this->modules='core/modules.php';
 		$this->surl='core/surl.php';
 		$this->template='core/template.php';
 	}

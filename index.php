@@ -3,6 +3,7 @@ session_start();
 define("_PLUGSECURE_", true);
 require_once('core/registry.php');
 $registry = Registry::singleton();
+$url_data = surl::parseUrl(config::$s_url,  $_SERVER['REQUEST_URI']);
 
 /* 
 $registry->config='core/config.php';

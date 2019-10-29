@@ -38,6 +38,11 @@ class functions{
 	    echo $content;
     }
 
+    public static function stripPost($text)
+    {
+
+    }
+
 }
 
 
