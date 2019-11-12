@@ -114,7 +114,10 @@ div {
 	background: #d5d5d5;
 }
 
-.posts, .single_post, .error, .page  {
+.posts, 
+.single_post, 
+.error, 
+.page {
    	margin: 0 auto;
   }
 
@@ -126,7 +129,8 @@ div {
 
 .single_post .item, 
 .error .item, 
-.page .item{
+.page .item,
+.cms_user_message{
 	background: #FFFFFF;
 	color: #444444;
    	text-decoration: none;
@@ -255,137 +259,20 @@ form.user_auth_form .box input#submit_btn {
 form.user_auth_form .box input#submit_btn:hover {
 background: #398796;
 }
-html {
-		background:url(../img/background/bg-1280.jpg) center 20px no-repeat #222222;
-		-moz-background-size: 100%; /* Firefox 3.6+ */
-		-webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
-		-o-background-size: 100%; /* Opera 9.6+ */
-		background-size: 100%; /* Современные браузеры */
-	}
 
-	.top-bar{
-		font-size: 16px;
-		letter-spacing: 3px;
-		padding-top: 2px;
-		padding-bottom: 2px;
-		max-height: 26px;
-	}
-	#motto {
-		width: 813px;
-	}
+.cms_user_message {
+	padding: 10px 50px;
+	box-sizing: border-box;
+	font-size: 1.2em;
+	margin: 0 auto;
+}
 
-	.header{
-		width: 813px;
-		height: 98px;
-	}
+.cms_user_message.error {
+	color: #d75a4a;
+	background: url('data:image/false;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAalAAAGpQEXmZfdAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAADNQTFRF////zGYz3F1G1VpK1lhL1llL11pK11pK11pK11lK11pK11pK11pK33pt4IF1++/u/PPyIScm+QAAAAx0Uk5TAAUWMEtqf4Cy0Ob69Vq7RgAAAIRJREFUKM91kkkSwyAMBIfFMsuY+P+vzQECJPH0haoWJYEkoOOjpVKSRY8dd1YOqrnlQ+ZGDh9/VH5Rj3H/x5M1AIDL/CM7ACcfMMD3RFfrpl09mUcc4tW2g4wwbpHpaUhckeWZUGbBdt/Ts+iATCWLy+fKD8qW6CbKtutB6dHqZXhanzfOwBUpdF0PfgAAAABJRU5ErkJggg==') no-repeat 10px center #FFFFFF;
+}
 
-	#logo{
-		height: 65px;
-		width: 382px;
-		background:url(../img/logo_middle.png) center top no-repeat;
-		margin-top: 33px;
-		float:left;
-	}
-
-	#quotes{
-		width: 306px;
-		min-height:46px;
-		max-height: 78px;
-		height: auto;
-		margin-left: 488px;
-		font-size:11px;
-		color: #4D4D4D;
-		padding: 13px 7px 20px 13px;
-		background:url(../img/quotes/v-for-vendetta_middle.png) 97% top no-repeat #000000;
-	}
-
-	#menu {
-		width: 813px;
-		height: 26px;
-		font-size: 23px;
-		font-weight:bold;
-	}
-
-	#menu #separator {
-		color: hsla(0,0%,100%,0.15);
-	}
-
-	#menu a, a:active {
-		padding-right: 3px;
-	}
-
-	.interesting {
-		width: 813px;
-		height: 299px;
-		margin-top: 11px;
-	}
-
-	.interesting #cover {
-		width: 377px;
-		background:url(../img/big-cover.jpg) no-repeat;
-		background-size: 100%;
-	}
-
-	.interesting #message {
-		margin-left: 384px;
-		padding-right: 7px;
-	}
-
-	.interesting #message .tittle h1{
-		font-size: 17px;
-	}
-
-	.interesting #message .text{
-		font-size: 16px;
-		padding-top: 10px;
-	}
-
-	.interesting #message .pages .point{
-	 	width: 13px;
-		height: 13px;
-		-moz-border-radius: 7px;
-		-webkit-border-radius: 7px;
-		border-radius: 7px;
-		margin-right: 5px;
-		margin-bottom: 3px;
-	}
-
-	.interesting #message .pages .point.active{
-		box-shadow: 0 0 7px 1px rgba(232,232,232,0.5);
-	}
-
-	.posts {
-	   	width: 820px;
-	   	margin-top: 7px;
-	}
-
-	.posts .item {
-	    margin-bottom: 7px;
-	    margin-right: 3px;
-	    margin-left: 3px;
-	    width: 267px;
-	}
-
-	.posts .item img.left {
-		padding-right: 7px;
-	}
-
-	.posts .item img.right {
-		padding-left: 7px;
-	}
-
-	.posts .item #text {
-		font-size: 13px;
-		padding: 7px;
-	}
-
-	.posts .item #player {
-		font-size: 16px;
-		padding: 7px;
-	}
-
-	.play_btn {
-		height: 23px;
-		background:url('../img/play_btn_middle.png') no-repeat left center;
-		padding-left: 23px;
-	}
+.cms_user_message.notice {
+	color: #25ae88;
+	background: url('data:image/false;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAMAAADXqc3KAAAAA3NCSVQICAjb4U/gAAAACXBIWXMAAAalAAAGpQEXmZfdAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAJlQTFRF////M5mZI66LJa+KJa2IJK2JJK+JJq2HJa2IJa6IJa6IJa6IJa6IJ6+JKK+JKK+KK7CLLLGMLrGNOLWSObWTO7aUPLeVPbeVRLmZSLubS7ydUr+hV8CjWcGkXcOmZMarb8qxcMqxec22gNC6iNO+kNbCodzMq+DRt+TYwejd0O7l0+7n2fHq3/Pu5PXw5vbx5/by6ffz9/z7PM7Q+gAAAAx0Uk5TAAUWMEtqf4Cy0Ob69Vq7RgAAALpJREFUKM99UtcCgyAMRERkpHvvXbtr+/8fVymoiKX3QOACl5AEIQ1MKBOCUYKRjSCWYCBpUPIhBws8zPlIQgUyMvcdPvN83wQcauAqTuyQTbXQLE9HqHFaKzGMiPPgeG4pQxCt8vtrF7QWq/Cbe09vGBLKdIb6uEzH5obQjmW6UGb6mkHh0FLz5w5g9FgVmiwPPrgk/du2DEaLdNvJ+2BlQawPTuxq4XpJjNKfInrL7m+Uv7X+Yfg1Ph/rPBfnphk9uAAAAABJRU5ErkJggg==') no-repeat 10px center #FFFFFF;
+}

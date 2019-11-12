@@ -25,15 +25,22 @@ if (empty($url_data['action'])){
                 $try_alias = $try_alias->fetch_assoc();
                 $res['id'] =  $try_alias['alias'];
             }else{
-                $res['id'] = surl::genUri('posts','show',array('id' = $res['id']));
+                $res['id'] = surl::genUri('posts','show',array('id' => $res['id']));
             }
 
         }else{
-            $res['id'] = surl::genUri('posts','show',array('id' = $res['id']));
+            $res['id'] = surl::genUri('posts','show',array('id' => $res['id']));
         }
         $res['text'] = functions::stripPost($res['text']);
         $posts_grid .= template::loadTemplate(config::$template,'_POSTS',$res,true);
     }
     functions::toContent($posts_grid,'posts');
     unset($posts_grid,$posts,$res);
+}elseif ($url_data['action'] == 'show' && !empty($url_data['params']['id'])){//TODO added 30.10.2019
+    $post  = database::prepareQuery("SELECT * FROM `posts` WHERE `id` = 's:id' LIMIT 1;",array('id'=> $url_data['params']['id']));
+    $res = $post ->fetch_assoc();
+    functions::setTitle($res['title']);
+    functions::toContent(template::loadTemplate(config::$template,'_SINGLE_POST_'.$res['class'],$res,true),'single_post');
+}else{
+    handler::engineError('Exception', 'Ошибка загрузки модуля posts.');
 }

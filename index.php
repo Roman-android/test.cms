@@ -80,14 +80,14 @@ foreach ($chpu_data as $key => $value) {
     }
 }
 //====================================
-
-$content_text = '
+//TODO commented 05/11/2019
+/*$content_text = '
 	<div style="width: 813px; min-height: 300px; background: #FFFFFF; color: #444444; margin: 0 auto; text-align: center;">
 		<h1>Hello WORLD!</h1>
 		<h3>It\'s works! </h3>
  	</div>';
 functions::setTitle('Главная');
-functions::toContent($content_text);
+functions::toContent($content_text);*/
 
 //Генерируем страницу в элемент нашего глобального массива
 config::$global_cms_vars['PAGE'] = template::loadTemplate(config::$template, 'index', config::$global_cms_vars);
