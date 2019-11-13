@@ -1,14 +1,8 @@
 <?php
 
-
-
 if (!defined('_PLUGSECURE_')){
-
 	die('Прямой вызов модуля запрещен!');
-
 }
-
-
 
 class functions{
 	
@@ -19,7 +13,6 @@ class functions{
 
 		if($class){
 			Config::$global_cms_vars['CONTENT'].= '<div class="'.$class.'">'.$contents.'</div>';
-
 		}else{
 			Config::$global_cms_vars['CONTENT'].=$contents;
 		}
