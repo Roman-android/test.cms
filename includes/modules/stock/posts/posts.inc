@@ -31,7 +31,7 @@ if (empty($url_data['action'])){
         }else{
             $res['id'] = surl::genUri('posts','show',array('id' => $res['id']));
         }
-        $res['text'] = functions::stripPost($res['text']);
+        //$res['text'] = functions::stripPost($res['text']);
         $posts_grid .= template::loadTemplate(config::$template,'_POSTS',$res,true);
     }
     functions::toContent($posts_grid,'posts');
