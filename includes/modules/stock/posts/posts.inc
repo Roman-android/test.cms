@@ -5,7 +5,23 @@ if (!defined('_PLUGSECURE_')){
     die('Прямой вызов запрещен!');
 }
 
+echo '<div style="color: #ffffff;">Проверка: $url_data(action) = ' .$url_data['action'].'</div>';
+
+/*
+functions::setTitle("Новости");
+functions::toContent("Тестовое 3","test");
+functions::toContent("Тестовое 4","test");
+
 if (empty($url_data['action'])){
+    functions::setTitle("Новости");
+    functions::toContent("Тестовое","test");
+}*/
+
+/*echo '<div style="color: #ffffff;">Проверка: $url_data(action) = ' .$url_data['action'].'</div>';
+echo '<div style="color: #ffffff;">$url_data(params)(id) = ' .$url_data['params']['id'].'</div>';*/
+
+
+/*if (empty($url_data['action'])){
     functions::setTitle("Новости");
     $posts = database::query("SELECT * FROM `posts` ORDER BY `id`;");
     $posts_grid = '';
@@ -43,4 +59,4 @@ if (empty($url_data['action'])){
     functions::toContent(template::loadTemplate(config::$template,'_SINGLE_POST_'.$res['class'],$res,true),'single_post');
 }else{
     handler::engineError('Exception', 'Ошибка загрузки модуля posts.');
-}
+}*/

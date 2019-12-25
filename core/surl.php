@@ -23,7 +23,7 @@ class Surl
                 $alias = $query_alias->fetch_assoc();
                 $request_uri = $alias['address'];
             }
-            if ($type = 1){
+            if ($type == 1){
                 $url_path = parse_url($request_uri,PHP_URL_PATH);
                 $uri_parts = explode('/',trim($url_path,'/'));
                 if(count($uri_parts)%2){
@@ -35,7 +35,7 @@ class Surl
                             unset($_GET['action']);
                         }
                         foreach ($_GET as $key => $value){
-                            $data['params']['key'] = $value;
+                            $data['params'][$key] = $value;
                         }
                     }else{
                         $uri_parts = explode('&',trim($url_path,'/'));
@@ -81,7 +81,7 @@ class Surl
                 $result .= $action . '/';
                 if (is_array($params)) {
                     foreach ($params as $key => $value) {
-                        $result .= $key . '/' . $value;
+                        $result .= $key . '/' . $value.'/';
                     }
                 }
             }
