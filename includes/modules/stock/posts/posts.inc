@@ -5,17 +5,23 @@ if (!defined('_PLUGSECURE_')){
     die('Прямой вызов запрещен!');
 }
 
-echo '<div style="color: #ffffff;">Проверка: $url_data(action) = ' .$url_data['action'].'</div>';
+echo '<div style="color: #ffffff;">Проверка: $url_data(module) = ' .$url_data['module'].'</div>';
+echo '<div style="color: #ffffff;">Проверка: $url_data_1(action) = ' .$url_data_1.'</div>';
 
 /*
 functions::setTitle("Новости");
 functions::toContent("Тестовое 3","test");
 functions::toContent("Тестовое 4","test");
+*/
 
-if (empty($url_data['action'])){
+
+if(empty($url_data['action'])){
     functions::setTitle("Новости");
     functions::toContent("Тестовое","test");
-}*/
+}elseif($url_data['action'] == 'show' && !empty($url_data['params']['id'])){
+    functions::setTitle("4567");
+    functions::toContent("4567","test");
+}
 
 /*echo '<div style="color: #ffffff;">Проверка: $url_data(action) = ' .$url_data['action'].'</div>';
 echo '<div style="color: #ffffff;">$url_data(params)(id) = ' .$url_data['params']['id'].'</div>';*/

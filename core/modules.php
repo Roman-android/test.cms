@@ -15,12 +15,13 @@ class Modules{
         self::getModule();
     }*/
     public static function getModule($module){
+        echo '<div style="color: #ffffff;">getModule() подключен</div>';
         if (file_exists('./includes/modules/custom/'.$module.'/'.$module.'.inc')){
             require './includes/modules/custom/'.$module.'/'.$module.'.inc';
             return './includes/modules/custom/'.$module.'/'.$module.'.inc';
         }elseif (file_exists('./includes/modules/stock/'.$module.'/'.$module.'.inc')){
-            echo '<div style="color: #ffffff;">Posts подключен</div>';
-            require './includes/modules/stock/'.$module.'/'.$module.'.inc';
+            /*echo '<div style="color: #ffffff;">Posts подключен</div>';*/
+            require_once './includes/modules/stock/'.$module.'/'.$module.'.inc';
             return './includes/modules/stock/'.$module.'/'.$module.'.inc';
         }else{
             return false;

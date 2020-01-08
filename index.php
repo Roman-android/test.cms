@@ -4,6 +4,7 @@ define("_PLUGSECURE_", true);
 require_once('core/registry.php');
 $registry = Registry::singleton();
 $url_data = surl::parseUrl(config::$s_url,  $_SERVER['REQUEST_URI']);
+$url_data_1 = "text is visible!";
 echo '<div style="color: #ffffff;">$url_data(action) = ' .$url_data['action'].'</div>';
 echo '<div style="color: #ffffff;">$url_data(params)(id) = ' .$url_data['params']['id'].'</div>';
 echo '<div style="color: #ffffff;">$_SERVER(REQUEST_URI) = ' .$_SERVER['REQUEST_URI'].'</div>';

@@ -41,7 +41,7 @@ class Registry implements StorableObject{
     private function __construct(){
         $this -> loadCore();
     }
-	
+//ниже осталось по старому
 	public static function singleton(){
 		if(!isset(self::$instance)){
 			$obj = __CLASS__;
@@ -103,6 +103,3 @@ class Registry implements StorableObject{
 	private function __sleep() {}
 	
 }
-
-
-?>
