@@ -17,7 +17,8 @@ class Config{
 		'base'=>'u47689_test_admin',
 		'charset'	=>	'utf8'		//кодировка
 	);
-	
+
+
 	public static $s_url = 1;
 	public static $global_cms_vars	= array();
 	

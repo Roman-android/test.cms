@@ -161,6 +161,7 @@ div {
 	background:hsla(0,0%,100%,0.3);
 	cursor: pointer;
 }
+/*Стили для изображений*/
 .item img.top {
 	width: 100%;
 	height: auto;

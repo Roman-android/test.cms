@@ -29,13 +29,14 @@ class Registry implements StorableObject{
 
 	public function loadCore(){
 		$this->config='core/config.php';
-		$this->test='core/test.php';
+
         $this->functions='core/functions.php';
         $this->handler='core/handler.php';
 		$this->database='core/database.php';
 		$this->modules='core/modules.php';
 		$this->surl='core/surl.php';
 		$this->template='core/template.php';
+        //$this->test='core/test.php';
 	}
 
     private function __construct(){
