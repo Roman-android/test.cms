@@ -4,23 +4,6 @@ define("_PLUGSECURE_", true);
 require_once('core/registry.php');
 $registry = Registry::singleton();
 $url_data = surl::parseUrl(config::$s_url,  $_SERVER['REQUEST_URI']);
-$url_data_1 = "text is visible!";
-
-//require_once('core/test.php');
-
-/*
-$registry->config='core/config.php';
-$registry->test='core/test.php';
-$registry->database='core/database.php';
-$registry->surl='core/surl.php';
- */
-
-/* 
-//то же самое без магического метода
-$registry->addObject('config','core/config.php');
-$registry->addObject('test','core/test.php');
-$registry->addObject('database','core/database.php');
- */
 
 echo '<b><un>Подключено</un></b>';
 
@@ -84,16 +67,32 @@ foreach ($chpu_data as $key => $value) {
 }
 //====================================
 //TODO commented 05/11/2019
-$content_text = '
+/*$content_text = '
 	<div style="width: 813px; min-height: 300px; background: #FFFFFF; color: #444444; margin: 0 auto; text-align: center;">
 		<h1>Hello WORLD!</h1>
 		<h3>It\'s works! </h3>
  	</div>';
-/*functions::setTitle('Главная');*/
-functions::toContent($content_text);
+functions::toContent($content_text);*/
+if(empty($url_data)){
+    $request_module = 'posts';
+    $request_template = 'index';
+}else{
+    $request_module = $url_data['module'];
+    $request_template = 'page';
+}
+
+$try_module = modules::getModule($request_module);
+if ($try_module) {
+    require_once $try_module;
+}else{
+    handler::engineError('module_not_found', './includes/modules/stock/'.$request_module.'/'.$request_module.'.inc');
+}
+
+
+
 
 //Генерируем страницу в элемент нашего глобального массива
-config::$global_cms_vars['PAGE'] = template::loadTemplate(config::$template, 'index', config::$global_cms_vars);
+config::$global_cms_vars['PAGE'] = template::loadTemplate(config::$template, $request_template, config::$global_cms_vars);
 
 //показываем страницу, которая хранится в нашем глобальном массиве
 echo config::$global_cms_vars['PAGE'];

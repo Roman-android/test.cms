@@ -5,13 +5,7 @@ if (!defined('_PLUGSECURE_')){
     die('Прямой вызов запрещен!');
 }
 
-/*
-functions::setTitle("Новости");
-functions::toContent("Тестовое 3","test");
-functions::toContent("Тестовое 4","test");
-*/
 $url_data = surl::parseUrl(config::$s_url,  $_SERVER['REQUEST_URI']);
-echo "<div style='color: #ffffff;'>Файл posts: ".$url_data['action']."</div>";
 
 if(empty($url_data['action']))
 {

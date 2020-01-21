@@ -11,12 +11,7 @@ class Modules{
         return self::$className;
     }
 
-/*    private function __construct(){
-        self::getModule();
-    }*/
     public static function getModule($module){
-        echo '<div style="color: #ffffff;">getModule() подключен</div>';
-        require_once './includes/modules/stock/posts/test.php';
 
         if (file_exists('./includes/modules/custom/'.$module.'/'.$module.'.inc')){
             require_once './includes/modules/custom/'.$module.'/'.$module.'.inc';
@@ -27,5 +22,6 @@ class Modules{
         }else{
             return false;
         }
+
     }
 }

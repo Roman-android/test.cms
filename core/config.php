@@ -21,8 +21,9 @@ class Config{
 
 	public static $s_url = 1;
 	public static $global_cms_vars	= array();
-	
-	public static function getClassName(){
+    public static $strip_posts = 200;
+
+    public static function getClassName(){
 		return self::$className;
 	}
 	
