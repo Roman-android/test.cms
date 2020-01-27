@@ -20,6 +20,7 @@ $registry_test_var = '456';
  * @property string modules
  * @property string surl
  * @property string template
+ * @property string menus
  */
 class Registry implements StorableObject{
 	
@@ -36,6 +37,7 @@ class Registry implements StorableObject{
 		$this->modules='core/modules.php';
 		$this->surl='core/surl.php';
 		$this->template='core/template.php';
+		$this->menus='core/menus.php';
         //$this->test='core/test.php';
 	}
 
@@ -62,8 +64,18 @@ class Registry implements StorableObject{
 
     //альтернативный метод через магию
     public function __set($key,$object){
-        require_once ($object);
-        self::$objects[$key] = new $key(self::$instance);
+
+        if (!isset(self::$objects[$key])) {
+            require_once($object);
+            self::$objects[$key] = new $key();
+        } else {
+            if (isset(self::$objects[$key])){
+                handler::engineError('exception', 'Заблокирована попытка переопределения объекта ' . $key . ': ' . $object);
+            }else{
+                die('Заблокирована попытка переопределения объекта ' . $key . ': ' . $object);
+            }
+        }
+
         //$this -> addObject($key,$object);
     }
 

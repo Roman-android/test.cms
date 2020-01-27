@@ -76,6 +76,28 @@ class Handler{
 				';
 		}
 	}
+
+	public static function httpError($error){
+        $descript = array(
+            '400'	=>	'Bad Request',
+            '401'	=>	'Unauthorized',
+            '402'	=>	'Payment Required',
+            '403'	=>	'Forbidden',
+            '404'	=>	'Not Found',
+            '405'	=>	'Method Not Allowed',
+            '406'	=>	'Not Acceptable',
+            '407'	=>	'Proxy Authentication Required',
+            '408'	=>	'Request Timeout',
+            '409'	=>	'Conflict',
+            '410'	=>	'Gone',
+            '413'	=>	'Request Entity Too Large ',
+            '429'	=>	'Too Many Requests',
+            '444'	=>	'',
+            '000'	=>	'Undefinded Error'
+        );
+        header($_SERVER['SERVER_PROTOCOL'].' '.$error.' '.$descript[$error]);
+        header('Location: '.surl::genUri('error', $error));
+    }
 	
 	public static function getClassName(){
 		return self::$className;

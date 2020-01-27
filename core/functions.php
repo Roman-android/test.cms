@@ -31,13 +31,21 @@ class functions{
 	    echo $content;
     }
 
-    public static function stripPost($text)
+    /*public static function stripPost($text)
     {
         $check_pre_tags = strpos($text, '<pre');
         if($check_pre_tags < config::$strip_posts && (!empty($check_pre_tags) || $check_pre_tags !=0))
             return substr(strip_tags($text), 0, strpos($text, ' ', $check_pre_tags)).'...';
         else
             return substr(strip_tags($text), 0, strpos($text, ' ', config::$strip_posts)).'...';
+    }*/
+
+    public static function stripPost($text){
+        if (strlen($text) > config::$strip_posts){
+            return substr(strip_tags($text), 0, config::$strip_posts).'...';
+        }else{
+            return substr(strip_tags($text), 0);
+        }
     }
 
 }
